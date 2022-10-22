@@ -1,25 +1,56 @@
-import logo from './logo.svg';
+
 import './App.css';
+import AppContainer from './AppContainer/AppContainer';
+import { useState } from 'react';
+import TodoListContainer from './TodoListContainer/TodoListContainer';
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  const [thingTodo, setThingTodo] = useState("");
+  const [things, setThings] = useState([]);
+
+  function addItem(){
+    
+    if(!thingTodo){
+      alert("Ingresa algo!")
+    }
+
+    const thing = {
+      id: Math.floor(Math.random() * 1000),
+      value: thingTodo
+    };
+
+    setThings(oldList => [...oldList, thing]);
+
+    setThingTodo("");
+
+  }
+
+  function deleteThing(id){
+    console.log(id)
+  }
+
+  return <AppContainer>
+    <TodoListContainer>
+      <h2>Todo List</h2>
+      <div>
+        <input 
+        type="text" 
+        placeholder='Ingresa tu cosa para hacer' 
+        value={thingTodo} 
+        onChange={e => setThingTodo(e.target.value)} />
+        <button onClick={() => addItem()} >Agregar</button>
+      </div>
+      <ul>
+        {things.map(thing => {
+          return(
+            <li key={thing.id}>{thing.value} <button onClick={ () => deleteThing(thing.id)} >❌</button> </li>
+          )
+        })}
+      </ul>
+    </TodoListContainer>
+  </AppContainer>
 }
 
 export default App;
