@@ -1,4 +1,3 @@
-
 import './App.css';
 import AppContainer from './AppContainer/AppContainer';
 import { useState } from 'react';
@@ -14,21 +13,30 @@ function App() {
     
     if(!thingTodo){
       alert("Ingresa algo!")
-    }
 
+      const emptyThing = {
+        id: Math.floor(Math.random() * 1000),
+        value: "Ingresa algo bobo"
+      };
+
+      setThings(oldList => [...oldList, emptyThing])
+    }
+    
     const thing = {
       id: Math.floor(Math.random() * 1000),
       value: thingTodo
     };
 
-    setThings(oldList => [...oldList, thing]);
-
+    if(thingTodo){
+      setThings(oldList => [...oldList, thing]);
+    }
     setThingTodo("");
 
   }
 
   function deleteThing(id){
-    console.log(id)
+    var newArr = [...things.filter((thing) => thing.id !== id)]
+    setThings(newArr)
   }
 
   return <AppContainer>

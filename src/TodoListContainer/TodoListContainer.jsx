@@ -10,6 +10,32 @@ const TodoListWrapper = styled.div`
     align-items: center;
     padding: 20px;
     flex-direction: column;
+
+    & button {
+      border: none;
+      background-color: transparent;
+      border: 1px solid white;
+      border-radius: 8px;
+      cursor: pointer;
+      color: white;
+    }
+
+    & input{
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px solid #28619b;
+      color: white;
+      margin-right: 15px;
+    }
+
+    & button:hover{
+      transform: scale(1.1);
+    }
+    & ul {
+      list-style: none;
+      border-left: 1px solid white;
+    }
+
 `
 
 const TodoListContainer = ({children}) => {
